@@ -8,16 +8,20 @@ import { ChatService } from '../services/ChatService';
 })
 export class AppComponent {
   title = 'app';
+  latestMessage=[];
+  messageText='';
+
   constructor(private chat: ChatService){ }
 
   ngOnInit() {
     this.chat.messages.subscribe(msg => {
-      console.log(msg);
+      
+      this.latestMessage.push(msg.message);
     })
   }
 
   sendMessage() {
-    this.chat.sendMsg("Test Message success");
+    this.chat.sendMsg({ message: this.messageText});
   }
 
 
